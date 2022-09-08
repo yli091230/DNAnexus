@@ -4,9 +4,13 @@
 
 1. Install tools for local access DNAnexus.
 
-2. Get files names that stored in DNAnexus, `dx find data --name "<file_name_pattern>" --path "<path_want_to_check>" > filename_list.txt`.
-
-## Workflow management on DNAnexus
+2. Prepare files for running HipSTR
+* Get files names that stored in DNAnexus, `dx find data --name "<file_name_pattern>" --path "<path_want_to_check>" > filename_list.txt`.
+* UKBiobank use reference genome GRCh38 but didn't specify the detailed verion. Based on the header of cram files, pickthis one [GRCh38](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa).
+  * Use `dx upload <local_directory> --destination <cloud_pathi>`.\
+    The command may not function with large file, can use wdl to download file or use the [Upload Agent](https://documentation.dnanexus.com/user/objects/uploading-and-downloading-files/batch/upload-agent#uploading-a-single-file) recommended by DNAnexus (haven't try this one yet).
+    
+## Use DNAnexus to run workflow 
 1. To compile wdl file to workflow use `java -jar dxCompiler-2.10.4.jar compile <your_wdl_file> -project <ukb_project_id> -folder <directory_to_storage_on_DNAnexus>`. This will output a string "workflow-xxxx" that needed for running workflow. 
 * If the `<directory_to_storage_on_DNAnexus>` does not exist, it will create for you. For example, /test/ folder not exist, it will create a /test/ folder under the root of your project and put the "workflow-xxxx" and other files in there.
 * Use `dx ls --brief <directory_to_storage_on_DNAnexus>` to check workflow ID if forgot.
@@ -15,3 +19,8 @@
 * If `--destination` not specified, dx run will output results to root directory by default.
 * If `<path_to_storage>` is not exist, it will create for you. To create `<path_to_storage>` manually use `dx mkdir -p <path_to_storage>`.
 3. How to check the job status using "Analysis ID: analysis-GGGfFFjJv7B1FFF291FPfFx5" that ouput call dx run.
+
+
+## Workflow name lookup
+download_ref: workflow-GGJ1pJQJv7B5Jv8J5K8z1G69
+index_reference: workflow-GGJ28b0Jv7BPQ9F67x9KXvBz
