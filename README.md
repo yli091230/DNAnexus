@@ -1,8 +1,8 @@
-#Using DNAnexus to analyze UK Biobank data
+# Using DNAnexus to analyze UK Biobank data
 
-#Get access to data
+# Get access to data
 
-#Install tools for local access DNAnexus
+# Install tools for local access DNAnexus
 
 1. Get files names that stored in DNAnexus, `dx find data --name "<file_name_pattern>" --path "<path_want_to_check>" > filename_list.txt`
 
