@@ -10,3 +10,10 @@ GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
 get_crai.sh
 ukbio_*_list.txt
 
+hipref_chr21.bed
+random_50_crai.txt
+random_50_cram.txt
+random_50_cram_no_fileid.txt
+samtool_index.wdl
+samtool_index_input.json
+
