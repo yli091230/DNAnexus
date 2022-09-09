@@ -24,7 +24,7 @@
 4. How to check the job status using "Analysis ID: analysis-GGGfFFjJv7B1FFF291FPfFx5" that ouput call dx run.
 ### Notes on wdl file and docker
 1. If the docker image is build on macbook with M1 CPU, use `docker buildx build --platform linux/amd64`. If not, it can't run on DNAnexus.
-2. For test run, redirect stdout or stderr to a file is not recommended. DNAnexus wouldn't be able to transfer those error/infor if job failed, which makes the debugging very difficult. 
+2. For test run, redirect stdout or stderr to a file is not recommended. DNAnexus wouldn't be able to transfer those error/infor if job failed, which makes the debugging very difficult.**But**, once test run works, it is better to redirect stdout and stderr as a output because the online log sometime wouldn't be fully display. 
 3. If tools need other files that not specified in the options, make sure include those file in the `Input`.
  
 
