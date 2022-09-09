@@ -1,0 +1,21 @@
+{
+    "stage-common.genome": {
+        "$dnanexus_link": "file-GGJ1z28JbVqbpqB93YbPqbzz"
+    },
+    "stage-common.genome_idx": {
+        "$dnanexus_link": "file-GGJ94JQJv7BGFYq8BGp62xPV"
+    },
+    "stage-common.str_ref": {
+        "$dnanexus_link": "file-GGJ3Zq0Jv7BJ7BgPB835xQ7B"
+    },
+    "stage-common.bam_indexs": [
+      {
+        "$dnanexus_link": "file-FyXz8b8JkF62zqyb56939ZZZ"
+      }
+    ],
+    "stage-common.bams": [
+      {
+        "$dnanexus_link": "file-FyZ4y3QJkF65BjYFK4fVvp3p"
+      }
+    ]
+}

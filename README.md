@@ -14,13 +14,28 @@
 1. To compile wdl file to workflow use `java -jar dxCompiler-2.10.4.jar compile <your_wdl_file> -project <ukb_project_id> -folder <directory_to_storage_on_DNAnexus>`. This will output a string "workflow-xxxx" that needed for running workflow. 
 * If the `<directory_to_storage_on_DNAnexus>` does not exist, it will create for you. For example, /test/ folder not exist, it will create a /test/ folder under the root of your project and put the "workflow-xxxx" and other files in there.
 * Use `dx ls --brief <directory_to_storage_on_DNAnexus>` to check workflow ID if forgot.
+* Use `--streamFiles [all, none, perfile(default)]` to mount data instead of download. For `perfile` need `parameter_meta` section in the wdl file.
 2. To run workflow use `dx run <workflow-xxxx> -y -f input.json --destination <path_to_storage>`.
 * To generate an `input.json` file, use `dx run <workflow-xx>` in an interactive mode and get the template for `input.json`. Alternatively, `java -jar dxCompiler.jar compile <your_wdl_file> -project project-xxxx -folder <directory_to_storage_on_DNAnexus> -inputs input.json` will convert Crowell JSON format input file into DNAnexus format during compiling `input.dx.json`.
+  * `awk '{print "{ \n","\"$dnanexus_link:\"",$NF, "},\n"}' random_50_cram.txt| tr '()' '""' | less` to get array of inputs.
 * If `--destination` not specified, dx run will output results to root directory by default.
 * If `<path_to_storage>` is not exist, it will create for you. To create `<path_to_storage>` manually use `dx mkdir -p <path_to_storage>`.
 3. How to check the job status using "Analysis ID: analysis-GGGfFFjJv7B1FFF291FPfFx5" that ouput call dx run.
-
+### Notes on wdl file and docker
+1. If the docker image is build on macbook with M1 CPU, use `docker buildx build --platform linux/amd64`. If not, it can't run on DNAnexus.
+2. For test run, redirect stdout or stderr to a file is not recommended. DNAnexus wouldn't be able to transfer those error/infor if job failed, which makes the debugging very difficult. 
+3. If tools need other files that not specified in the options, make sure include those file in the `Input`.
 
 ## Workflow name lookup
 download_ref: workflow-GGJ1pJQJv7B5Jv8J5K8z1G69
 index_reference: workflow-GGJ28b0Jv7BPQ9F67x9KXvBz
+hipstr_multi: workflow-GGJ973jJv7B217G3K0PY5Yky 
+
+
+## Problems need to solve
+
+2. Efficent way to get input?
+3. How to trouble shoot?
+  a. The GUI seems have no information about what goes in the command section?
+  b. Error message ""
+    - HipSTR can't access the index file?
