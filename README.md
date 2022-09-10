@@ -35,9 +35,13 @@
 
 
 ## Problems need to solve
-
-2. Efficent way to get input?
-3. How to trouble shoot?
+1. Efficent way to get input?
+2. How to trouble shoot?
   a. The GUI seems have no information about what goes in the command section?
   b. Error message ""
-    - HipSTR can't access the index file?
+
+## Usefull git repositories
+1. [dxWDL](https://github.com/dnanexus/dxWDL/blob/v1/doc/ExpertOptions.md#setting-a-default-docker-image-for-all-tasks): provide extra information about dxWDL file documentation.
+2. [WDL](https://github.com/openwdl/wdl/blob/main/versions/1.1/SPEC.md#file-stdout): provide specification for WDL.
+3. [dxCompiler](https://documentation.dnanexus.com/developer/building-and-executing-portable-containers-for-bioinformatics-software/dxcompiler#dxcompiler-setup): provide more documentation about dxCompiler, like `-extras`,`parameter_meta`. See also the [DNAnexus websit] (https://documentation.dnanexus.com/developer/building-and-executing-portable-containers-for-bioinformatics-software/dxcompiler#dxcompiler-setup)
+4. Other information from the DNAnexus like [billing](https://documentation.dnanexus.com/admin/org-management), [dx command](https://documentation.dnanexus.com/user/helpstrings-of-sdk-command-line-utilities#category-orgs),[DNAnexus websit](https://documentation.dnanexus.com/user/objects/searching-data-objects). 
