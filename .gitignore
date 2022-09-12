@@ -5,6 +5,8 @@ hipref_autosomal.bed
 test_upload.txt
 ukbio_file_list.txt
 GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
+#downloaded results
+results/
 
 #generate 50 sample file id
 get_crai.sh
