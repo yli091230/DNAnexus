@@ -1,7 +1,8 @@
 # Using DNAnexus to analyze UK Biobank data
 
 ## UKBiobank sample information
-The datset  contains WGS sequencing results from 200,025 samples with 2\*151 reads.\
+The datset  contains WGS sequencing results from 200,025 samples with 2\*151 reads.
+* All of the sample meta files can only access by JupyterLab, `dx cat` command is not allowed to view those file at the local termianl. 
 ### Selection of UK Biobank samples
 1. The strWAS paper:
   * Remove potential DNA contamination.
@@ -21,7 +22,7 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 
 2. Prepare files for running HipSTR
 * Get files names that stored in DNAnexus, `dx find data --name "<file_name_pattern>" --path "<path_want_to_check>" > filename_list.txt`.
-* UKBiobank use reference genome GRCh38 but didn't specify the detailed verion. Based on the header of cram files, pickthis one [GRCh38](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa).
+* UKBiobank use reference genome GRCh38 but didn't specify the detailed verion. Based on the header of cram files, pick this one [GRCh38](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa).
   * Use `dx upload <local_directory> --destination <cloud_pathi>`.\
     The command may not function with large file, can use wdl to download file or use the [Upload Agent](https://documentation.dnanexus.com/user/objects/uploading-and-downloading-files/batch/upload-agent#uploading-a-single-file) recommended by DNAnexus (haven't try this one yet).
     
@@ -43,7 +44,7 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 3. If tools need other files that not specified in the options, make sure include those file in the `Input`.
  
 ## Run DXJupyterLab
-1. To launch a JupyerLab session, select `JupyterLab` tab from the `TOOLS` menue and click on the `New JupyterLab` on the top right corner. Specify the project, instance type and other running information then start the session. After the session started, click on the `Open` button to open the JupyterLab in browser.
+1. To launch a JupyterLab session, select `JupyterLab` tab from the `TOOLS` menue and click on the `New JupyterLab` on the top right corner. Specify the project, instance type and other running information then start the session. After the session started, click on the `Open` button to open the JupyterLab in browser.
 
 2. There are two types of notebooks: Local vs DNAnexus
 * The main difference between the Local and DNAnexus is files (include ipynb and datas) in DNAnexus notebook will be kept after close of JupyterLab while files in Local notebook will lost. 
@@ -57,6 +58,7 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 2. How to trouble shoot?
   a. The GUI seems have no information about what goes in the command section?
   b. Error message ""
+3. How to avoid run duplicated jobs?
 
 ## Usefull git repositories
 1. [dxWDL](https://github.com/dnanexus/dxWDL/blob/v1/doc/ExpertOptions.md#setting-a-default-docker-image-for-all-tasks): provide extra information about dxWDL file documentation.
