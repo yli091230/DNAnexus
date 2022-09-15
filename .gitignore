@@ -11,12 +11,14 @@ results/
 
 #generate 50 sample file id
 get_crai.sh
-ukbio_*_list.txt
+ukbio_*_list*.txt
 
 hipref_chr21.bed
-random_*_crai.txt
-random_*_cram.txt
+random_*_crai*.txt
+random_*_cram*.txt
 random_*_cram_no_fileid.txt
 samtool_index.wdl
 samtool_index_input.json
+
+wdl/job_log
 
