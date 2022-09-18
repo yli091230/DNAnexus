@@ -1,5 +1,17 @@
 # Using DNAnexus to analyze UK Biobank data
-
+## [UK Biobank Showcase user Guide](https://biobank.ndph.ox.ac.uk/showcase/ukb/exinfo/ShowcaseUserGuide.pdf)
+## Install tools
+1. Install Python SDK and Command Line Tools
+  ```bash
+  pip3 install dxpy
+  eval "$(register-python-argcomplete dx|sed 's/-o default//')"
+  ```
+  * For MacOX with zsh, enable tab completion by running the following command
+  ```bash
+  autoload -Uz compinit && compinit
+  autoload bashcompinit && bashcompinit
+  eval "$(register-python-argcomplete dx|sed 's/-o default//')"
+  ```
 ## UKBiobank sample information
 The datset  contains WGS sequencing results from 200,025 samples with 2\*151 reads.
 * All of the sample meta files can only access by JupyterLab, `dx cat` command is not allowed to view those file at the local termianl. 
@@ -37,12 +49,25 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
   * `awk '{print "{ \n","\"$dnanexus_link\":",$NF, "\n},"}' random_100_cram_ab_15G.txt | tr '()' '""' | less` to get array of inputs.
 * If `--destination` not specified, dx run will output results to root directory by default.
 * If `<path_to_storage>` is not exist, it will create for you. To create `<path_to_storage>` manually use `dx mkdir -p <path_to_storage>`.
-4. How to check the job status using "Analysis ID: analysis-GGGfFFjJv7B1FFF291FPfFx5" that ouput call dx run.
+* Add `--name <job_name>` to specify job name, if not specified, it will use the workflow name as job name.
+4. How to set up [batch run](https://documentation.dnanexus.com/user/running-apps-and-workflows/running-batch-jobs) 
+
+## [Monitoring executions](https://documentation.dnanexus.com/user/running-apps-and-workflows/monitoring-executions)
+1. Executions contains both  analysis and Jobs (maybe wrong):
+  * Analyses are executions of workflows and consist of one or more app(let)s
+  * `dx find executions` to return 10 most recent executions in the current project.
+  * `dx find analyses` to return top-level analyses, not any of the jobs.
+1. How to check the job status using "Analysis ID: analysis-GGGfFFjJv7B1FFF291FPfFx5" that ouput call dx run.
+
 ### Notes on wdl file and docker
 1. If the docker image is build on macbook with M1 CPU, use `docker buildx build --platform linux/amd64`. If not, it can't run on DNAnexus.
 2. For test run, redirect stdout or stderr to a file is not recommended. DNAnexus wouldn't be able to transfer those error/infor if job failed, which makes the debugging very difficult. **But**, once test run works, it is better to redirect stdout and stderr as a output because the online log sometime wouldn't be fully display. 
 3. If tools need other files that not specified in the options, make sure include those file in the `Input`.
- 
+4. To store docker images on DNAnexus, use `dx-docker` command:
+* **Issues**:
+  * Not sure whether this is the correct command to store images.
+  * The command depend on `docker2aci` package, which is achrived and have trouble on installation.
+
 ## Run DXJupyterLab
 1. To launch a JupyterLab session, select `JupyterLab` tab from the `TOOLS` menue and click on the `New JupyterLab` on the top right corner. Specify the project, instance type and other running information then start the session. After the session started, click on the `Open` button to open the JupyterLab in browser.
 
@@ -56,8 +81,6 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 ## Problems need to solve
 1. Efficent way to get input?
 2. How to trouble shoot?
-  a. The GUI seems have no information about what goes in the command section?
-  b. Error message ""
 3. How to avoid run duplicated jobs?
 
 ## Usefull git repositories
@@ -65,3 +88,8 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 2. [WDL](https://github.com/openwdl/wdl/blob/main/versions/1.1/SPEC.md#file-stdout): provide specification for WDL.
 3. [dxCompiler](https://documentation.dnanexus.com/developer/building-and-executing-portable-containers-for-bioinformatics-software/dxcompiler#dxcompiler-setup): provide more documentation about dxCompiler, like `-extras`,`parameter_meta`. See also the [DNAnexus websit](https://documentation.dnanexus.com/developer/building-and-executing-portable-containers-for-bioinformatics-software/dxcompiler#dxcompiler-setup)
 4. Other information from the DNAnexus like [billing](https://documentation.dnanexus.com/admin/org-management), [dx command](https://documentation.dnanexus.com/user/helpstrings-of-sdk-command-line-utilities#category-orgs),[DNAnexus websit](https://documentation.dnanexus.com/user/objects/searching-data-objects). 
+
+## To do
+1. Check core numbers in the instance 
+2. Where to change execution name using dx run.
+3. check [SSH](https://documentation.dnanexus.com/developer/apps/execution-environment/connecting-to-jobs)
