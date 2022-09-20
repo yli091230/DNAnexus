@@ -39,7 +39,7 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
     The command may not function with large file, can use wdl to download file or use the [Upload Agent](https://documentation.dnanexus.com/user/objects/uploading-and-downloading-files/batch/upload-agent#uploading-a-single-file) recommended by DNAnexus (haven't try this one yet).
     
 ## Use DNAnexus to run workflow 
-1. DNAnexus use AWS for computation job. By default, DNAnexus will use spot instance with small memory.  
+1. DNAnexus use AWS for computation job. By default, DNAnexus will use spot instance with small memory (need to confirm, can't find the documentation).  
 2. To compile wdl file to workflow use `java -jar dxCompiler-2.10.4.jar compile <your_wdl_file> -project <ukb_project_id> -folder <directory_to_storage_on_DNAnexus>`. This will output a string "workflow-xxxx" that needed for running workflow. 
 * If the `<directory_to_storage_on_DNAnexus>` does not exist, it will create for you. For example, /test/ folder not exist, it will create a /test/ folder under the root of your project and put the "workflow-xxxx" and other files in there.
 * Use `dx ls --brief <directory_to_storage_on_DNAnexus>` to check workflow ID if forgot, `--long` flag to diplay full path and file ID.
@@ -50,6 +50,7 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 * If `--destination` not specified, dx run will output results to root directory by default.
 * If `<path_to_storage>` is not exist, it will create for you. To create `<path_to_storage>` manually use `dx mkdir -p <path_to_storage>`.
 * Add `--name <job_name>` to specify job name, if not specified, it will use the workflow name as job name.
+* Using `--head-job-on-demand` or `--priority` to specify on-demand or spot instance. **Need to double check**
 4. How to set up [batch run](https://documentation.dnanexus.com/user/running-apps-and-workflows/running-batch-jobs) 
 
 ## [Monitoring executions](https://documentation.dnanexus.com/user/running-apps-and-workflows/monitoring-executions)

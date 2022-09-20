@@ -12,7 +12,7 @@ results/
 #generate 50 sample file id
 get_crai.sh
 ukbio_*_list*.txt
-
+hipref_10k_per_file/
 hipref_chr21.bed
 random_*_crai*.txt
 random_*_cram*.txt

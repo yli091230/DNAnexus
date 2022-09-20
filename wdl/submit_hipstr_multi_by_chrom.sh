@@ -9,7 +9,7 @@ mkdir -p ${log_folder}
 mkdir -p ${input_folder}
 echo "Use workflow ${hipmulti}" >> ${log_file}
 
-for file_n in $(seq -f %03g 0 20)
+for file_n in $(seq -f %03g 20 154)
 do
   chro_ref_id=$(dx ls --long /HipSTR_call/references/hipref_10k_per_file/ |  awk -v chr_ref="hipref_split_${file_n}" '$6==chr_ref {print $NF}' | tr '()' '""')
   echo "  Submit STR ref number ${file_n} using file ID ${chro_ref_id}" >> ${log_file}
