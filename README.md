@@ -50,7 +50,8 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 * If `--destination` not specified, dx run will output results to root directory by default.
 * If `<path_to_storage>` is not exist, it will create for you. To create `<path_to_storage>` manually use `dx mkdir -p <path_to_storage>`.
 * Add `--name <job_name>` to specify job name, if not specified, it will use the workflow name as job name.
-* Using `--head-job-on-demand` or `--priority` to specify on-demand or spot instance. **Need to double check**
+* Using `--head-job-on-demand` or set `--priority` to specify on-demand (`High`) or spot(`low`) instance. Or, `dx run app-xxxx --extra-args '{"executionPolicy":{"spotOnly":true}}'`. 
+
 4. How to set up [batch run](https://documentation.dnanexus.com/user/running-apps-and-workflows/running-batch-jobs) 
 
 ## [Monitoring executions](https://documentation.dnanexus.com/user/running-apps-and-workflows/monitoring-executions)
