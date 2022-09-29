@@ -6,8 +6,12 @@ workflow run_HipSTR_multi {
         File genome 
         File str_ref
         File genome_idx
-        Int? memory_gb
         Array[File] bam_indexs
+        Int? memory_gb
+        Int? disk_space
+        Int? cpu
+        String? HD_type
+        String? docker_image
     }
 
     call hipstr_multi {
@@ -16,8 +20,12 @@ workflow run_HipSTR_multi {
           genome=genome,
           genome_idx=genome_idx,
           str_ref=str_ref,
+          bam_indexs=bam_indexs,
           memory_gb=memory_gb,
-          bam_indexs=bam_indexs
+          disk_space=disk_space,
+          cpu=cpu,
+          HD_type=HD_type,
+          docker_image=docker_image
     }
 
     output {
@@ -36,8 +44,12 @@ task hipstr_multi {
         File genome
         File genome_idx
         File str_ref
-        Int? memory_gb
         Array[File] bam_indexs
+        Int? memory_gb
+        Int? disk_space
+        Int? cpu
+        String? HD_type
+        String? docker_image
     } 
 
     String vcffile="joint_call"
@@ -48,17 +60,19 @@ task hipstr_multi {
           --fasta ~{genome} \
           --regions ~{str_ref} \
           --str-vcf ~{vcffile}.vcf.gz \
-          --stutter-out stutter_models.txt > run.log 2>&1 || echo "Failed run"
+          --stutter-out stutter_models.txt > run.log 2>&1 || echo "Failed run" &
       echo "Finshed"
     >>>
-    Int cpu=1
-    Int disk_space=100
-    Int actual_memory_gb=select_first([memory_gb,16]) 
+    Int actual_cpu=select([cpu,1])
+    Int actual_disk_space=select_first([disk_space,8])
+    Int actual_memory_gb=select_first([memory_gb,12]) 
+    String acutal_docker_image=select_first([docker_image,"yli091230/hipstr:amd64"])
+    String actual_HD_type=select_first([HD_type,'SSD'])
     runtime {
-        docker:"yli091230/hipstr:amd64"
+        docker: actual_docker_image
         cpu: "${cpu}"
         memory: "${actual_memory_gb} GB"
-        disks: "local-disk ${disk_space} SSD"
+        disks: "local-disk ${disk_space} ${actual_HD_type}"
     }
 
     output {

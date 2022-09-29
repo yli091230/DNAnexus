@@ -10,6 +10,7 @@ GRCh38_full_analysis_set_plus_decoy_hla.fa.fai
 results/
 
 #generate 50 sample file id
+test_split/
 get_crai.sh
 ukbio_*_list*.txt
 hipref_10k_per_file/
