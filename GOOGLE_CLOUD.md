@@ -3,7 +3,7 @@
 1. How to install google clould: [instruction](https://cloud.google.com/sdk/docs/install)
 2. How to initilize google cloud CLI [here](https://cloud.google.com/sdk/docs/initializing)
   1. Use a different google cloud account (not the AoU email one, **should be the ucsd email**) to loggin the google cloud and [creat a project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) or [select a exist project](https://console.cloud.google.com/projectselector2/home/dashboard?_ga=2.231392601.710925857.1663345404-1626730909.1663177519)
-  2. Switch between multiple account and projects: the current project information is `PROJECT_ID: ucsd-medicine-cast  NAME: ucsd-medicine-cast  PROJECT_NUMBER: 167974413636`.
+  2. Switch between multiple account and projects: the current project information is `PROJECT_ID: `.
     * For multiple projects or account, need to create separate configuration for each project/account, for details type`gcloud topic configurations`.
     * To create a new configurations, using `gcloud init`(tested, don't know how to change config name) or `gcloud config configurations create <my-config>`. 
     * To activate a configuration, using `gcloud config configurations activate <my-config>`; to display the path of the activate configuration run `gcloud info --format="get(config.paths.active_config_path)`.
