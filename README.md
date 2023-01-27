@@ -66,6 +66,9 @@ The datset  contains WGS sequencing results from 200,025 samples with 2\*151 rea
 2. For test run, redirect stdout or stderr to a file is not recommended. DNAnexus wouldn't be able to transfer those error/infor if job failed, which makes the debugging very difficult. **But**, once test run works, it is better to redirect stdout and stderr as a output because the online log sometime wouldn't be fully display. 
 3. If tools need other files that not specified in the options, make sure include those file in the `Input`.
 4. To store docker images on DNAnexus, use `dx-docker` command:
+5. **Cache docker images**:
+  * Using `docker save` and `docker load` 
+    * `docker save` create a tarball image that can be included in DNAnexus and in the app run docker load
 * **Issues**:
   * Not sure whether this is the correct command to store images.
   * The command depend on `docker2aci` package, which is achrived and have trouble on installation.
